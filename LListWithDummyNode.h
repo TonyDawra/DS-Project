@@ -10,14 +10,14 @@ Deconstructor
 #define LLISTWITHDUMMYNODE_H
 #include <iostream>
 using namespace std;
-typedef Course Elementtype;
+typedef Course ElementType;
 class LListWithDummyNode{
     /*** Node class ***/
     private:
         class Node { // Inner class definition of node structure
             public:
-                Node(const Elementtype&);
-                Elementtype data;
+                Node(const ElementType&);
+                ElementType data;
                 Node* next;  
                 // Some Node function members        
     }
@@ -34,16 +34,16 @@ class LListWithDummyNode{
             * Precondition: 
             * Postcondition: 
             ********************************************************************/
-    LListWithDummyNode(const Elementtype&);
+    LListWithDummyNode(const LListWithDummy&);
     ~LListWithDummyNode();
     set
-    bool isEmpty();
-    bool isFull();
-    bool insertAtPosition(const Elementtype&,int);
-    bool deleteAtPosition(const Elementtype&,int);
+    bool isEmpty()const;
+    bool insertAtEnd(const ElementType&)
+    bool insertAtPosition(const ElementType&,int);
+    bool deleteAtPosition(const ElementType&,int);
     void display(ostream&);
     
 }
-ostream& operator<<(ostream&,Elementtype&);
-istream& operator>>(istream&,Elementtype&);
+ostream& operator<<(ostream&,ElementType&);
+istream& operator>>(istream&,ElementType&);
 #endif /* ARRAYLIST_H */
