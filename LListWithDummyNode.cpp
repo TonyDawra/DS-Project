@@ -11,7 +11,7 @@ LListWithDummyNode::LListWithDummyNode(){
     this->myFirst=new Node (ElementType& course);
     this->mySize=0;
 }
-LListWithDummyNode::LListWithDummyNode(const LListWithDummy& orig){
+LListWithDummyNode::LListWithDummyNode(const LListWithDummyNode& orig){
     NodePtr loopingNode = orig.myFirst;
     while (loopingNode != NULL) 
 	{
@@ -54,15 +54,17 @@ bool LListWithDummyNode::insertAtEnd(const ElementType& course){
     }
     return false;
 }
-bool LListWithDummyNode::search(const ElementType& course){
+int LListWithDummyNode::search(const ElementType& course){
     NodePtr tempPtr= this->myFirst->next;
+    int pos=0;
     while(tempPtr!= NULL){
         if(tempPtr->data==course){
-            return true;
+            return pos;
         }
         tempPtr=tempPtr->next;
+        pos++
     }
-    return false;
+    return -1;
 }
 ostream& LListWithDummyNode::display(ostream& out){
     if(isEmpty()){
@@ -71,17 +73,17 @@ ostream& LListWithDummyNode::display(ostream& out){
         NodePtr current = this->myFirst->next;
         cout << "The list is: ";
         while (current != NULL) {
-            out << current->data << " ";
+            out << "The list is: " << current->data << " ";
             this->current = current->next;
         }
         cout << endl;
     }
     return out;
 }
-ostream& operator<<(ostream& out,const LListWithDummy& course){
+ostream& operator<<(ostream& out,const LListWithDummyNode& course){
     return course.display(out);
 }
-istream& operator>>(istream in ,const LListWithDummy& course){
+istream& operator>>(istream in ,const LListWithDummyNode& course){
     int numCourses;
     cout<<"Enter the number of courses you want to add: ";
     cin>>numCourses;
