@@ -1,17 +1,17 @@
-#include "LListWithDummy.h"
+#include "LListWithDummyNode.h"
 #include <iostream>
 using namespace std;
 
-LListWithDummy::Node::Node(const ElementType& data){
+LListWithDummyNode::Node::Node(const ElementType& data){
     this->data=data;
     this->next=NULL;
 
 }
-LListWithDummy::LListWithDummy(){
+LListWithDummyNode::LListWithDummyNode(){
     this->myFirst=new Node (ElementType& course)
     this->mySize=0;
 }
-LListWithDummy::LListWithDummy(const LListWithDummy& orig){
+LListWithDummyNode::LListWithDummyNode(const LListWithDummy& orig){
     NodePtr loopingNode = orig.myFirst;
     while (loopingNode != NULL) 
 	{
@@ -19,7 +19,7 @@ LListWithDummy::LListWithDummy(const LListWithDummy& orig){
         loopingNode = loopingNode->next;
     }
 }
-LListWithDummy::~LListWithDummy(){
+LListWithDummyNode::~LListWithDummyNode(){
     
     NodePtr tempPtr;
 
@@ -31,13 +31,13 @@ LListWithDummy::~LListWithDummy(){
         this->mySize--;
 }
 }
-bool LListWithDummy::isEmpty()const{
+bool LListWithDummyNode::isEmpty()const{
     return this->mySize==0;
 }
-int LListWithDummy::getmySize(){
+int LListWithDummyNode::getmySize(){
     return this->mySize;
 }
-bool LListWithDummy::insertAtEnd(const ElementType& course){
+bool LListWithDummyNode::insertAtEnd(const ElementType& course){
     NodePtr newPtr = new Node (course);
     if(isEmpty()){
         this->myFirst->next=newPtr;
@@ -54,7 +54,7 @@ bool LListWithDummy::insertAtEnd(const ElementType& course){
     }
     return false;
 }
-bool LListWithDummy::search(const ElementType& course){
+bool LListWithDummyNode::search(const ElementType& course){
     NodePtr tempPtr= this->myFirst->next;
     while(tempPtr!= NULL){
         if(tempPtr->data==course){
@@ -64,7 +64,7 @@ bool LListWithDummy::search(const ElementType& course){
     }
     return false;
 }
-ostream& LListWithDummy::display(ostream& out){
+ostream& LListWithDummyNode::display(ostream& out){
     if(isEmpty()){
         cout<<"Empty List";
     }else{
