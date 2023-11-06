@@ -1,9 +1,14 @@
 
 /*-- LListWithDummyNode.h ---------------------------------------------------------------
-This header file defines the data type Time for processing time. 
-Basic operations are:
-Constructor
-Deconstructor
+This header file defines the LListWithDummyNode data type.
+  Basic operations:
+    no-arg constructor         : Constructs a default LListWithDummyNode
+    copy constructor           : Constructs a new LLiLListWithDummyNodest using existing LListWithDummyNode parameter
+    destructor                 : Deletes a LListWithDummyNode
+    isEmpty		       : Checks whether or not LListWithDummyNode is empty
+    search                     : Checks whether inputted data exists in LListWithDummyNode
+    insertAtEnd                : Inserts data at end of LListWithDummyNode
+    display                    : Displays content of the LListWithDummyNode
 ...
 -------------------------------------------------------------------------*/
 #ifndef LLISTWITHDUMMYNODE_H
