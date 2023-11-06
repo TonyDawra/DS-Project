@@ -21,7 +21,7 @@ class LListWithDummyNode{
                 ElementType data;
                 Node* next;  
                 // Some Node function members        
-    }
+    };
     typedef Node* NodePtr;
     /*** List's data members ***/
     NodePtr myFirst;
@@ -35,7 +35,7 @@ class LListWithDummyNode{
             * Precondition: none
             * Postcondition: an empty Linked List with Dummy object has been constructed; mySize=0
             ********************************************************************/
-    LListWithDummyNode(const LListWithDummy&);
+    LListWithDummyNode(const LListWithDummyNode&);
     /********************************************************************
             * Purpose: 
             * Precondition: 
@@ -78,7 +78,7 @@ class LListWithDummyNode{
             * Postcondition: the courses represented by the LListWithDummy object has been inserted into out
             ********************************************************************/
     
-}// end of LListWithDummy class
+};// end of LListWithDummy class
 // Prototype of output operator
 ostream& operator<<(ostream&,ElementType&);
 // Prototype of input operator

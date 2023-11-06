@@ -8,7 +8,7 @@ LListWithDummyNode::Node::Node(const ElementType& data){
 
 }
 LListWithDummyNode::LListWithDummyNode(){
-    this->myFirst=new Node (ElementType& course)
+    this->myFirst=new Node (ElementType& course);
     this->mySize=0;
 }
 LListWithDummyNode::LListWithDummyNode(const LListWithDummy& orig){
@@ -87,7 +87,7 @@ istream& operator>>(istream in ,const LListWithDummy& course){
     cin>>numCourses;
     ElementType course;
     for(int i=0;i<numCourses;i++){
-        in>>course
+        in>>course;
         course.insertAtEnd(in);
 }
 return in;
