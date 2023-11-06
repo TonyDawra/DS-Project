@@ -1,13 +1,19 @@
 
 /*-- LListWithDummyNode.h ---------------------------------------------------------------
+
+Author: Tony Dawra
+
 This header file defines the LListWithDummyNode data type.
   Basic operations:
     no-arg constructor         : Constructs a default LListWithDummyNode
     copy constructor           : Constructs a new LLiLListWithDummyNodest using existing LListWithDummyNode parameter
     destructor                 : Deletes a LListWithDummyNode
     isEmpty		       : Checks whether or not LListWithDummyNode is empty
+    getmySize                  : gets and return mySize
     search                     : Checks whether inputted data exists in LListWithDummyNode
+    insertAtPosition           : Inserts data at certain position of LListWithDummyNode
     insertAtEnd                : Inserts data at end of LListWithDummyNode
+    insertAtBeginning	       : Inserts data at beginning of LListWithDummyNode
     display                    : Displays content of the LListWithDummyNode
 ...
 -------------------------------------------------------------------------*/
@@ -34,53 +40,75 @@ class LListWithDummyNode{
 
     public:
     /*** List's function members ***/
+        /***** No-Arg Constructor *****/
     LListWithDummyNode();
     /********************************************************************
-            * Purpose: Construct a Linked List With Dummy object
+            * Purpose: Construct a LinkedListWithDummy object
             * Precondition: none
-            * Postcondition: an empty Linked List with Dummy object has been constructed; mySize=0
+            * Postcondition: an empty LinkedListWithDummy object has been constructed; 
+                             mySize=0 ;and myFirst points to a dummy Node with myFirst->next pointing to NULL.
             ********************************************************************/
+        /***** Copy Constructor *****/
     LListWithDummyNode(const LListWithDummyNode&);
     /********************************************************************
-            * Purpose: 
-            * Precondition: 
-            * Postcondition: 
+            * Purpose:  Construct a copy of a LinkedListWithDummy object.
+            * Precondition: A copy of origList is needed; origList is a const reference
+                            parameter.
+            * Postcondition: A LinkedListWithDummy object is constructed with myFirst, mySize and
+                             LinkedListWithDummy equal to the parameter's
             ********************************************************************/
+        /***** Destructor *****/
     ~LListWithDummyNode();
     /********************************************************************
-            * Purpose: 
-            * Precondition: 
-            * Postcondition: 
+            * Purpose:  Destroys a LinkedListWithDummy object
+            * Precondition: The life of a List object is over.
+            * Postcondition: The LinkedListWithDummy is empty;
+                             myFirst->next points to NULL; and mySize is 0.
             ********************************************************************/
     int getmySize();
     /********************************************************************
-            * Purpose: 
-            * Precondition: 
-            * Postcondition: 
+            * Purpose: Get the current size of the LinkedListWithDummy.
+            * Precondition: None.
+            * Postcondition: The current size of the LinkedListWithDummy is returned.
             ********************************************************************/
     bool isEmpty()const;
     /********************************************************************
-            * Purpose: check if the Linked list with dummy is enoty
+            * Purpose: check if the LinkedListWithDummy is enoty
             * Precondition: none
-            * Postcondition: true is returned if the linked list with dummy is empty , false if not
+            * Postcondition: true is returned if the lLinkedListWithDummy is empty , false if not
+            ********************************************************************/
+    bool insertAtPosition(const ElementType&,int);
+    /********************************************************************
+            * Purpose: insert a value into the linked list at a valid position
+            * Precondition: course is the object to be inserted, and `pos` is the position where it should be inserted. 
+                            The position must satisfy the condition 0 <= `pos` < `mySize`.
+            * Postcondition: If `pos` is a legal position, the `course` has been inserted into the LinkedListWithDummy at the specified position, 
+                             and true is returned. If `pos` is out of bounds, no changes are made to the list, and false is returned.
             ********************************************************************/
     bool insertAtEnd(const ElementType&);
     /********************************************************************
             * Purpose: insert a value into the linked list at the end
-            * Precondition: course is the object to be inserted; there is n
-            * Postcondition: 
+            * Precondition: course is the object to be inserted
+            * Postcondition: The course has been inserted at the end of the LinkedListWithDummy.
+            ********************************************************************/
+    bool insertAtBeginning(const ElementType&);
+    /********************************************************************
+            * Purpose: insert a value into the linked list at the beginning
+            * Precondition: course is the object to be inserted
+            * Postcondition: The course has been inserted at the beginning of the LinkedListWithDummy.
             ********************************************************************/
     int search(const ElementType&);
     /********************************************************************
-            * Purpose: 
-            * Precondition: 
-            * Postcondition: 
+            * Purpose: Search for an element in the LinkedListWithDummy
+            * Precondition:  The element to search for is course.
+            * Postcondition: Returns the position of the first occurrence of course in the LinkedListWithDummy. If not found, it returns -1.
             ********************************************************************/
     ostream& display(ostream&);
     /********************************************************************
-            * Purpose: display the linked list with dummy
-            * Precondition: the ostream out is open 
-            * Postcondition: the courses represented by the LListWithDummy object has been inserted into out
+            * Purpose: display the LinkedListWithDummy
+            * Precondition: the ostream out is open and ready for output
+            * Postcondition: The courses represented by the LListWithDummy object have been inserted into the `out`. 
+                             The modified `out` stream is returned for further use.
             ********************************************************************/
     
 };// end of LListWithDummy class
