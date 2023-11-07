@@ -11,7 +11,7 @@ public:
     Student();
 
 
-    // Constructor with ID, first name, last name, GPA and major
+    // Constructor with ID, first name, last name, GPA 
     Student(const string& id, const string& firstname, const string& lastname, double gpa);
     
     //Copy Constructor
@@ -30,7 +30,7 @@ public:
     void setlastname(const string &);
     void setid(const string &);
     void setGPA(double);
-    void setAS(const string &);
+    void setAS();
     
     
     // Display student information
