@@ -30,7 +30,7 @@ public:
     void setlastname(const string &);
     void setid(const string &);
     void setGPA(double);
-    void setAS(const string &);
+    void setAS();
     
     
     // Display student information
