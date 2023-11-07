@@ -68,24 +68,53 @@ public:
     ----------------------------------------------------------------------------------*/
 
 
+    /***** isEmpty operation *****/
+    inline bool isEmpty() const;
 
+    /*----------------------------------------------------------------------
+       Check if a DoublyLinkedList is empty.
 
+       Precondition: None
 
-    /***************************** Is Empty method *******************************
-    * Checks if the Doubly
-    *
-    * Precondition: None
-    * Post-Condition: Returns true if the list is empty, false if it's not
-    *******************************************************************************/
-    bool isEmpty() const;
+       Postcondition: true is returned if the list is empty, false if not.
+    -----------------------------------------------------------------------*/
+    
 
-
+    /***** insert at position operation *****/
     bool insertAtPos(ElementType, int);
+    /*----------------------------------------------------------------------
+       Insert a value into the list at a given position.
+       Precondition: item is the value to be inserted; there is room in
+                     the array (mySize < CAPACITY); and the position satisfies
+                     o <= pos <= mySize.
+       Postcondition: item has been inserted into the list at the position
+                     determined by pos (provided there is room and pos is a legal
+                     position).
+    -----------------------------------------------------------------------*/
+
+    /***** delete at position operation *****/
     bool deleteAtPos(int);
+    /*----------------------------------------------------------------------
+    Remove a value from the DoublyLinkedList at a given position.
+    Precondition: The list is not empty and the position satisfies
+    o <= pos < mySize.
+    Postcondition: element at the position determined by pos has been
+    removed (provided pos is a legal position).
+    ----------------------------------------------------------------------*/
+
     bool insertAtBeginning(ElementType);
     bool insertAtEnd(ElementType);
     int search(ElementType);
+
+    /***** output *****/
     void display(ostream&);
+    /*----------------------------------------------------------------------
+        Display a list.
+    
+        Precondition: The ostream out is open.
+    Postcondition: The list represented by this List object has been
+    inserted into out.
+    -----------------------------------------------------------------------*/
 
 private:
     class DNode { // Inner class definition of node structure
@@ -96,11 +125,15 @@ private:
         DNode* prev;
     };
     typedef DNode* DNodePtr;
+
+    /********Data Members ********/
     int mySize;
     DNodePtr myFirst;
 
 
-};
+}; //---- end of List class
+
+//------Prototype of output operator
 ostream& operator<<(ostream&, DoublyLinkedList&);
 istream& operator>>(istream&, DoublyLinkedList&);
 #endif

@@ -1,9 +1,14 @@
+/*--List.cpp------------------------------------------------------------
+This file implements DoublyLinkedList member functions.
+-------------------------------------------------------------------------*/
+
 #include "DoublyLinkedList.h"
 
 DoublyLinkedList::DNode::DNode(const ElementType& data)
 	: data(data), next(0), prev(0)
 {
 }
+
 DoublyLinkedList::DoublyLinkedList()
 	:myFirst(0), mySize(0)
 {
