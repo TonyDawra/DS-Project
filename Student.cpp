@@ -3,14 +3,14 @@
 int Student::nbOfstds=0;
 
 // Default Constructor
-Student::Student() : id(""), firstname(""), lastname(""), gpa(0.0) {nbOfstds}
+Student::Student() : id(""), firstname(""), lastname(""), gpa(0.0) {nbOfstds++;}
 
 
 // Constructor with all parameters: ID, First Name, Last Name, GPA, Registered status, and Major
-Student::Student(const string& id="", const string& firstname="", const string& lastname="", double gpa=0.0) : id(id), firstname(firstname), lastname(lastname), gpa(gpa) {}
+Student::Student(const string& id="", const string& firstname="", const string& lastname="", double gpa=0.0) : id(id), firstname(firstname), lastname(lastname), gpa(gpa) {nbOfstds++;}
 
 //Copy Constructor
-Student::Student(const Student &other) : Student(other.id, other.firstname, other.lastname, other.gpa) {}
+Student::Student(const Student &other) : Student(other.id, other.firstname, other.lastname, other.gpa) {nbOfstds++;}
 
 // Getter implementations
 string Student::getid() const {
@@ -67,14 +67,14 @@ void Student::setAS(){
 
 // Display student information implementation
 void Student::display() const {
-    out << "Id: " << getid() << "\n";
-    out << "Name: " << getfirstname() <<getlastname() "\n";
-    out << "GPA: " << getGPA() << "\n"; 
+    cout << "Id: " << getid() << "\n";
+    cout << "Name: " << getfirstname() <<getlastname() ;"\n";
+    cout << "GPA: " << getGPA() << "\n"; 
 }
 
 ostream& operator<<(ostream& out, const Student& student) {
     out << "Id: " << student.getid() << "\n";
-    out << "Name: " << student.getfirstname() <<student.getlastname() "\n";
+    out << "Name: " << student.getfirstname() <<student.getlastname() ;"\n";
     out << "GPA: " << student.getGPA() << "\n";
     return out;
 }
