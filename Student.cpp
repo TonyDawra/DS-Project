@@ -6,7 +6,7 @@ int Student::nbOfstds=0;
 Student::Student() : id(""), firstname(""), lastname(""), gpa(0.0) {nbOfstds++;}
 
 
-// Constructor with all parameters: ID, First Name, Last Name, GPA, Registered status, and Major
+// Constructor with all parameters: ID, First Name, Last Name, GPA
 Student::Student(const string& id="", const string& firstname="", const string& lastname="", double gpa=0.0) : id(id), firstname(firstname), lastname(lastname), gpa(gpa) {nbOfstds++;}
 
 //Copy Constructor
