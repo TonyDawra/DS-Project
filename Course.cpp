@@ -1,19 +1,22 @@
 #include "Course.h"
 
-Course::Course(string cCode, string cTitle, int credit, int cap){
-    code = cCode;
+Course::Course(char cCode[7], string cTitle, int credit, int cap){
     title = cTitle;
     credits = credit;
     enrolled = 0;
     capacity = cap;
+    for (int i = 0; i < 8; i++)
+        code[i] = cCode[i];
+
 }
 
 Course::Course(const Course& orig){
-    code = orig.code;
     title = orig.title;
     credits = orig.credits;;
     enrolled = orig.enrolled;
     capacity = orig.capacity;
+    for (int i = 0; i < 8; i++)
+        code[i] = orig.code[i];
 }
 
 string Course::getCode(){
