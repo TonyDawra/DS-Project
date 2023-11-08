@@ -42,8 +42,12 @@ string Student::getAS() const {
 //setters implementation
 
 void Student::setid(const string& id){
+	if(id[0]=='A' || id[0]=='a' && id.size()==8){
 	this->id=id;
-}
+	}
+	else cerr<<"invalid id";
+	}
+	
 
 
 void Student::setfirstname(const string& firstname){
@@ -53,11 +57,15 @@ void Student::setfirstname(const string& firstname){
 void Student::setlastname(const string& lastname){
 	this->lastname=lastname;
 }
-void Student::setGPA(double gpa){
-	this->gpa=gpa;
+void Student::setGPA(double gpa1){
+	if(gpa1<0.0){
+	gpa=0.0;}
+	else if(gpa1>4.0){
+		gpa=4.0;
+	}
+	else this->gpa=gpa1;
 	setAS();
 }
-
 void Student::setAS(){
     if (gpa < 2) {
         this->academicstatus="probation";
