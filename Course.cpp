@@ -54,7 +54,8 @@ void Course::addStudent(const Student&){
 void Course::dropStudent(const Student&){}
 
 ostream& Course::displayCourse(ostream& out){
-    
+    out<<getCode()<<'\t'<<getTitle()<<'\t'<<getCredits()<<'\t'<<getEnrolled()<<'\t'<<getCapacity()<<endl;
+    return out;
 }
 
 void Course::displayRegisteredStudents(){}
