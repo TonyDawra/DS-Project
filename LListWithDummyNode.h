@@ -6,7 +6,7 @@ Author: Tony Dawra
 This header file defines the LListWithDummyNode data type.
   Basic operations:
     no-arg constructor         : Constructs a default LListWithDummyNode
-    copy constructor           : Constructs a new LLiLListWithDummyNodest using existing LListWithDummyNode parameter
+    copy constructor           : Constructs a new LListWithDummyNode using existing LListWithDummyNode parameter
     destructor                 : Deletes a LListWithDummyNode
     isEmpty		       : Checks whether or not LListWithDummyNode is empty
     getmySize                  : gets and return mySize

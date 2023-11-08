@@ -8,9 +8,33 @@
 using namespace std;
 
 int main(){
-    ifstream inputFile;
+    DoublyLinkedList<Student> nonRegisteredStudents;
+    LListWithDummyNode<Course> offeredCourses;
+
+    ifstream inputFileStudent,inputFileCourse;
     ofstream outputFile; 
-    inputFile.open("")
+
+    inputFileStudent.open("student.txt");
+    inputFileCourse.open("course.txt");
+
+    int numberOfStudents;
+    inputFileStudent>>numberOfStudents;
+    for(int i=0;i<numberOfStudents;++i){
+        Student student;
+        inputFileStudent>>student;
+        nonRegisteredStudents.insertAtEnd(student);
+    }
+    inputFileStudent.close();
+
+    int numberOfCourses;
+    inputFileCourse>>numberOfCourses;
+    for(int j=0;j<numberOfCourses;++j){
+        Course course;
+        inputFileCourse>>course;
+        offeredCourses.insertAtEnd(course);
+    }
+    inputFileCourse.close();
+
     int choice=0;
     while(choice!=10){
         cout<<"\nMenu:\n";
@@ -30,6 +54,16 @@ int main(){
 
         switch(choice){
             case 1:
+            cout<<"Students that did not register yet:"<<endl;
+            if(nonRegisteredStudents.isEmpty()){
+                cout<<"All students are registered"<<endl;
+            }else{
+                int nbOfNonRegistredStudent=nonRegisteredStudents.getmySize()//make getmysize
+                cout<<"ID\t"<<"Name\t"<<"GPA\t"<<"Academic Status"<<endl;
+                for(int i=0;i<nbOfNonRegistredStudent;++i){
+                    cout<<student.getid()<<"\t"<<student.getlastname()<<", "<<student.getfirstname()<<"\t"<<student.getGPA()<<"\t"<<student.getAS()<<endl;
+                }
+            }
             break;
             case 2:
             break;
