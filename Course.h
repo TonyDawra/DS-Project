@@ -3,13 +3,12 @@
 
 #include <string>
 #include <iostream>
-#include "LListWithDummyNode.h"
 
 using namespace std;
 
 class Course{
 public:
-    Course(string, string, int, int);
+    Course(char*, string, int, int);
     Course(const Course &course);
     string getCode();
     string getTitle();
@@ -23,7 +22,7 @@ public:
     ostream& displayRegisteredStudents(ostream&) const;
     
 private:
-    string code;
+    char* code[7];
     string title;
     int credits;
     int enrolled;
