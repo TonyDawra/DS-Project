@@ -44,7 +44,7 @@ private:
     string firstname;
     string lastname;
     double gpa;
-    string academicstatus;
+    
     
 
     
