@@ -103,7 +103,7 @@ class LListWithDummyNode{
             * Precondition:  The element to search for is course.
             * Postcondition: Returns the position of the first occurrence of course in the LinkedListWithDummy. If not found, it returns -1.
             ********************************************************************/
-    ostream& display(ostream&);
+    void display(ostream&);
     /********************************************************************
             * Purpose: display the LinkedListWithDummy
             * Precondition: the ostream out is open and ready for output

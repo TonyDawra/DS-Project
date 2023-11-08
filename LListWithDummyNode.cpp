@@ -95,7 +95,7 @@ int LListWithDummyNode::search(const ElementType& course){
     }
     return -1;
 }
-ostream& LListWithDummyNode::display(ostream& out){
+void LListWithDummyNode::display(ostream& out){
     if(isEmpty()){
         cout<<"Empty List";
     }else{
@@ -107,7 +107,6 @@ ostream& LListWithDummyNode::display(ostream& out){
         }
         cout << endl;
     }
-    return out;
 }
 ostream& operator<<(ostream& out,const LListWithDummyNode& course){
     return course.display(out);
