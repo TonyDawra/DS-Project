@@ -83,7 +83,6 @@ int main(){
                 cout<<"Student:";
                 student.display();
                 cout << endl;
-
             }
             break;
             case 4:
