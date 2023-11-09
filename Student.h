@@ -11,8 +11,8 @@ public:
     Student();
 
 
-    // Constructor with ID, first name, last name, GPA 
-    Student(const string& id, const string& firstname, const string& lastname, double gpa);
+    // Constructor with ID, first name, last name, GPA and registeration status
+    Student(const string& id, const string& firstname, const string& lastname, double gpa,bool reg);
     
     //Copy Constructor
     Student(const Student& other);
@@ -23,7 +23,7 @@ public:
     string getid() const;
     double getGPA() const;
     string getAS() const;
-   
+    bool isreg()const;
     
     //setters
     void setfirstname(const string &);
@@ -31,10 +31,10 @@ public:
     void setid(const string &);
     void setGPA(double);
     void setAS();
-    
+    void setreg(bool);
     
     // Display student information
-    void display() const;
+    void display(const Student&) const;
 
     friend ostream& operator<<(ostream& , const Student&);
 
@@ -44,7 +44,7 @@ private:
     string firstname;
     string lastname;
     double gpa;
-    
+    bool reg;
     
 
     
