@@ -74,10 +74,9 @@ void Student::setAS(){
 }
 
 // Display student information implementation
-void Student::display() const {
-    cout << "Id: " << getid() << "\n";
-    cout << "Name: " << getfirstname() <<getlastname() ;"\n";
-    cout << "GPA: " << getGPA() << "\n"; 
+void Student::display( const Student& student) const {
+    cout << student.getid() << "\t"<< student.getlastname()<<", "<<student.getfirstname()<<"\t\t"<<student.getGPA()<<"    "<<student.getAS()<<endl;
+
 }
 
 ostream& operator<<(ostream& out, const Student& student) {
