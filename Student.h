@@ -1,6 +1,3 @@
-#ifndef STUDENT_H
-#define STUDENT_H
-#include <string>
 #include <iostream>
 using namespace std;
 
@@ -11,8 +8,8 @@ public:
     Student();
 
 
-    // Constructor with ID, first name, last name, GPA and registeration status
-    Student(const string& id, const string& firstname, const string& lastname, double gpa,bool reg);
+    // Constructor with ID, first name, last name, GPA and registered status
+    Student(const string& id, const string& firstname, const string& lastname, double gpa,bool reg,string major);
     
     //Copy Constructor
     Student(const Student& other);
@@ -24,7 +21,7 @@ public:
     double getGPA() const;
     string getAS() const;
     bool isreg()const;
-    
+    string getmajor()const;
     //setters
     void setfirstname(const string &);
     void setlastname(const string &);
@@ -32,8 +29,10 @@ public:
     void setGPA(double);
     void setAS();
     void setreg(bool);
+    void setmajor(string);
     
     // Display student information
+    void displayall(const Student&) const;
     void display(const Student&) const;
 
     friend ostream& operator<<(ostream& , const Student&);
@@ -45,9 +44,11 @@ private:
     string lastname;
     double gpa;
     bool reg;
-    
+    string major;
 
     
 };
 
 #endif // STUDENT_H
+
+    

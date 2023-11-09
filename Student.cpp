@@ -3,14 +3,14 @@
 int Student::nbOfstds=0;
 
 // Default Constructor
-Student::Student() : id(""), firstname(""), lastname(""), gpa(0.0) ,reg(false){nbOfstds++;}
+Student::Student() : id(""), firstname(""), lastname(""), gpa(0.0),reg(false) ,major(""){nbOfstds++;}
 
 
-// Constructor with all parameters: ID, First Name, Last Name, GPA and registeration status
-Student::Student(const string& id="", const string& firstname="", const string& lastname="", double gpa=0.0,bool reg=false) : id(id), firstname(firstname), lastname(lastname), gpa(gpa),reg(reg) {nbOfstds++;}
+// Constructor with all parameters: ID, First Name, Last Name, GPA, Registered status, and Major
+Student::Student(const string& id="", const string& firstname="", const string& lastname="", double gpa=0.0,bool reg=false,major="") : id(id), firstname(firstname), lastname(lastname), gpa(gpa),reg(reg),major(major) {nbOfstds++;}
 
 //Copy Constructor
-Student::Student(const Student &other) : Student(other.id, other.firstname, other.lastname, other.gpa,other.reg) {nbOfstds++;}
+Student::Student(const Student &other) : Student(other.id, other.firstname, other.lastname, other.gpa,other.reg,other.major) {nbOfstds++;}
 
 // Getter implementations
 string Student::getid() const {
@@ -29,17 +29,19 @@ double Student::getGPA() const {
 }
 
 string Student::getAS() const {
-    if (gpa < 2) {
+    if (this.gpa < 2) {
         return "Probation";
     } 
         return "Regular";
     }
 
-
 bool Student::isreg()const{
 return reg;
 }
 
+string Student getmajor()const{
+return major;
+}
 
 
 //setters implementation
@@ -51,6 +53,7 @@ void Student::setid(const string& id){
 	else cerr<<"invalid id";
 	}
 	
+
 
 
 void Student::setfirstname(const string& firstname){
@@ -69,6 +72,7 @@ void Student::setGPA(double gpa1){
 	else this->gpa=gpa1;
 	setAS();
 }
+
 void Student::setAS(){
     if (gpa < 2) {
         this->academicstatus="probation";
@@ -79,10 +83,17 @@ void Student::setAS(){
 void Student::setreg(bool choice){
 	this->reg=choice;
 }
-// Display student information implementation
-void Student::display( const Student& student) const {
-    cout << student.getid() << "\t"<< student.getlastname()<<", "<<student.getfirstname()<<"\t\t"<<student.getGPA()<<"    "<<student.getAS()<<endl;
 
+void Student::setmajor(string maj){
+	this->major=maj;
+}
+
+// Display student information implementation
+void Student::displayall( const Student& student) const {
+    cout << student.getid() << "\t"<< student.getlastname()<<", "<<student.getfirstname()<<"\t\t"<<student.getGPA()<<"    "<<student.getAS()<<endl;
+}
+void Student::display( const Student& student)const{
+	cout << student.getid() <<"  "<< student.getlastname()<<","<<student.getfirstname()
 }
 
 ostream& operator<<(ostream& out, const Student& student) {
