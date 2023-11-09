@@ -72,11 +72,20 @@ int main(){
                 int nbOfOfferedCourses=offeredCourses.getmySize();
                 cout<<"Code\t"<<"Title\t"<<"#Credits\t"<<"Enrolled\t"<<"Capacity"<<endl;
                 for(int i=0;i<nbOfOfferedCourses;++i){
-                  course.display();
+                  course.displayCourse();
             }
             }
             break;
+
             case 3:
+                int nbOfRegisteredStudents=RegisteredStudents.getmySize();
+                for(int i=0;i<nbOfRegisteredStudents;i++){
+                cout<<"Student:";
+                Student tempStudent = RegisteredStudents[i];
+                tempStudent.display();
+                cout << endl;
+
+            }
             break;
             case 4:
             break;
