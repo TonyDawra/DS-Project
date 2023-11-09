@@ -61,8 +61,7 @@ int main(){
                 int nbOfNonRegistredStudent=nonRegisteredStudents.getmySize()//make getmysize
                 cout<<"ID\t"<<"Name\t"<<"GPA\t"<<"Academic Status"<<endl;
                 for(int i=0;i<nbOfNonRegistredStudent;++i){
-                    cout<<student.getid()<<"\t"<<student.getlastname()<<", "<<student.getfirstname()<<"\t"<<student.getGPA()<<"\t"<<student.getAS()<<endl;
-                }
+                  student.display();
             }
             break;
             case 2:
@@ -90,4 +89,5 @@ int main(){
         }   
     }
     return 0;
+}
 }
