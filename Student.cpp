@@ -17,6 +17,7 @@ Student::~Student(){
     for (int i = 0; i < registeredcourses.size(); ++i) {
         delete registeredcourses[i]; 
     }
+	nbOfstds--;
 }
 // Getter implementations
 string Student::getid() const {
