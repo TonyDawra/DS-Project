@@ -9,6 +9,7 @@ using namespace std;
 
 int main(){
     DoublyLinkedList<Student> nonRegisteredStudents;
+    DoublyLinkedList<Student> RegisteredStudents;
     LListWithDummyNode<Course> offeredCourses;
 
     ifstream inputFileStudent,inputFileCourse;
@@ -58,13 +59,22 @@ int main(){
             if(nonRegisteredStudents.isEmpty()){
                 cout<<"All students are registered"<<endl;
             }else{
-                int nbOfNonRegistredStudent=nonRegisteredStudents.getmySize()//make getmysize
+                int nbOfNonRegistredStudent=nonRegisteredStudents.getmySize();//make getmysize
                 cout<<"ID\t"<<"Name\t"<<"GPA\t"<<"Academic Status"<<endl;
                 for(int i=0;i<nbOfNonRegistredStudent;++i){
                   student.display();
             }
             break;
             case 2:
+            if(offeredCourses.isEmpty()){
+                cout<<"No course are being offered"<<endl;
+            }else{
+                int nbOfOfferedCourses=offeredCourses.getmySize();
+                cout<<"Code\t"<<"Title\t"<<"#Credits\t"<<"Enrolled\t"<<"Capacity"<<endl;
+                for(int i=0;i<nbOfOfferedCourses;++i){
+                  course.display();
+            }
+            }
             break;
             case 3:
             break;
