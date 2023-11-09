@@ -3,14 +3,14 @@
 int Student::nbOfstds=0;
 
 // Default Constructor
-Student::Student() : id(""), firstname(""), lastname(""), gpa(0.0) {nbOfstds++;}
+Student::Student() : id(""), firstname(""), lastname(""), gpa(0.0) ,reg(false){nbOfstds++;}
 
 
-// Constructor with all parameters: ID, First Name, Last Name, GPA
-Student::Student(const string& id="", const string& firstname="", const string& lastname="", double gpa=0.0) : id(id), firstname(firstname), lastname(lastname), gpa(gpa) {nbOfstds++;}
+// Constructor with all parameters: ID, First Name, Last Name, GPA and registeration status
+Student::Student(const string& id="", const string& firstname="", const string& lastname="", double gpa=0.0,bool reg=false) : id(id), firstname(firstname), lastname(lastname), gpa(gpa),reg(reg) {nbOfstds++;}
 
 //Copy Constructor
-Student::Student(const Student &other) : Student(other.id, other.firstname, other.lastname, other.gpa) {nbOfstds++;}
+Student::Student(const Student &other) : Student(other.id, other.firstname, other.lastname, other.gpa,other.reg) {nbOfstds++;}
 
 // Getter implementations
 string Student::getid() const {
@@ -36,6 +36,9 @@ string Student::getAS() const {
     }
 
 
+bool Student::isreg()const{
+return reg;
+}
 
 
 
@@ -73,6 +76,9 @@ void Student::setAS(){
         this->academicstatus="regular";
 }
 
+void Student::setreg(bool choice){
+	this->reg=choice;
+}
 // Display student information implementation
 void Student::display( const Student& student) const {
     cout << student.getid() << "\t"<< student.getlastname()<<", "<<student.getfirstname()<<"\t\t"<<student.getGPA()<<"    "<<student.getAS()<<endl;
