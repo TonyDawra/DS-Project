@@ -2,40 +2,34 @@
 
   Author: Kayan Abdelbaki
 
-  This header file defines the DoublyLinkedList data type.
-  Basic operations:
-    no-arg constructor         : Constructs a default DCList
-    copy constructor           : Constructs a new DCList using existing DCList parameter
-    destructor                 : Deletes a DCList
-    isEmpty					   : Checks whether or not DCList is empty
-    search                     : Checks whether inputted data exists in DCList
-    insertAtPosition           : Inserts data at certain position of DCList
-    insertAtBeginning		   : Inserts data at beginning of DCList
-    insertAtEnd                : Inserts data at end of DCList
-    deleteAtPosition           : Deletes data at inputted posiiont
-    deleteAValue               : Deletes first occurence of inputted data
-    deleteBeforeAnElement      : Deletes first occurence of element before inputted data
-    findAndDelete              : Deletes all occurences of inputted data
-    removeFirst                : Cuts & returns data of first node
-    removeLast                 : Cuts & returns data of last node
-    deleteDuplicates           : Deletes duplicate elements in the DCList
-    display                    : Displays content of the DCList
+    This header file defines the DoublyLinkedList data type.
+    Basic operations:
+    no-arg constructor         : Constructs a DoublyLinkedList object
+    destructor                 : Destroys a DoublyLinkedList object
+    copy constructor           : Constructs a new DoublyLinkedList using existing DoublyLinkedList parameter
+    isEmpty		               : Checks if a DoublyLinkedList object is empty
+    search                     : Checks if inputted data exists in a DoublyLinkedList object
+    insertAtPos                : Inserts data at given position
+    deleteAtPos                : Deletes data at given position
+    insertAtBeginning		   : Inserts data at beginning of DoublyLinkedList object
+    insertAtEnd                : Inserts data at end of DoublyLinkedList object
+    at                         : Return a value from the DoublyLinkedList at a given position.
+    display                    : Displays content of a DoublyLinkedList object
 ---------------------------------------------------------------------------------------*/
-
 
 #ifndef DOUBLYLINKEDLIST_H
 #define DOUBLYLINKEDLIST_H
+#include "Student.h"
 #include <iostream>
 using namespace std;
 
-typedef int ElementType;
+typedef Student* DLLType;
 
-class DoublyLinkedList
-{
+class DoublyLinkedList {
 
 public:
     /******** Function Members *********/
-        /***** No-Arg Constructor *****/
+    /***** No-Arg Constructor *****/
     DoublyLinkedList();
     /*------------------------------------------------------------------------------
       Constructs a new DoublyLinkedList object
@@ -50,7 +44,7 @@ public:
     /*------------------------------------------------------------------------------
        Destroys a DoublyLinkedList object
 
-       Precondition: The life of a List object is over.
+       Precondition: The life of a DoublyLinkedList object is over.
        Post-Condition: The DoublyLinkedList is empty;
                        myFirst points to NULL; and mySize is 0.
     -------------------------------------------------------------------------------*/
@@ -61,75 +55,122 @@ public:
     /*----------------------------------------------------------------------------------
       Construct a copy of a DoublyLinkedList object.
 
-      Precondition: A copy of origList is needed; origList is a const reference
+      Precondition: A copy of orig is needed; orig is a const reference
                     parameter.
       Post-Condition: A DoublyLinkedList object is constructed with myFirst, mySize and
                       DoublyNodes equal to the parameter's
     ----------------------------------------------------------------------------------*/
 
-
     /***** isEmpty operation *****/
-    inline bool isEmpty() const;
-
+    inline bool isEmpty() const {
+        return mySize == 0;
+    }
     /*----------------------------------------------------------------------
        Check if a DoublyLinkedList is empty.
 
        Precondition: None
 
-       Postcondition: true is returned if the list is empty, false if not.
+       Postcondition: true is returned if the list is empty, false otherwise.
     -----------------------------------------------------------------------*/
-    
 
     /***** insert at position operation *****/
-    bool insertAtPos(ElementType, int);
+    bool insertAtPos(DLLType&, int);
     /*----------------------------------------------------------------------
-       Insert a value into the list at a given position.
-       Precondition: item is the value to be inserted; there is room in
-                     the array (mySize < CAPACITY); and the position satisfies
-                     o <= pos <= mySize.
-       Postcondition: item has been inserted into the list at the position
-                     determined by pos (provided there is room and pos is a legal
-                     position).
+       Insert a value into the DoublyLinkedList at a given position.
+
+       Precondition: data is the value to be inserted; pos is the position
+                     where data is to be inserted
+       Postcondition: true is returned if 0 <= pos <= mySize and  new DNode
+                     containing given data has been inserted into the
+                     DoublyLinkedList at pos; false is returned otherwise.
     -----------------------------------------------------------------------*/
 
     /***** delete at position operation *****/
     bool deleteAtPos(int);
     /*----------------------------------------------------------------------
-    Remove a value from the DoublyLinkedList at a given position.
-    Precondition: The list is not empty and the position satisfies
-    o <= pos < mySize.
-    Postcondition: element at the position determined by pos has been
-    removed (provided pos is a legal position).
+       Remove value from the DoublyLinkedList at a given position.
+
+       Precondition: pos is the position where DNode is to be deleted.
+       Postcondition: true is returned if 0 <= pos <= mySize; and DNode at
+                     pos is deleted; false is returned otherwise
     ----------------------------------------------------------------------*/
 
-    bool insertAtBeginning(ElementType);
-    bool insertAtEnd(ElementType);
-    int search(ElementType);
+    bool insertAtBeginning(DLLType&);
+    /*----------------------------------------------------------------------
+      Insert a value into the DoublyLinkedList at the beginning
+
+      Precondition: data is the value to be inserted.
+      Postcondition: true is returned and  new DNode containing given data
+                    has been inserted into the DoublyLinkedList at pos = 0
+   -----------------------------------------------------------------------*/
+
+    bool insertAtEnd(DLLType&);
+    /*----------------------------------------------------------------------
+      Insert a value into the DoublyLinkedList at the end
+
+      Precondition: data is the value to be inserted.
+      Postcondition: true is returned and  new DNode containing given data
+                    has been inserted into the DoublyLinkedList at
+                    pos = mySize.
+   -----------------------------------------------------------------------*/
+    DLLType at(int pos);
+
+    /*----------------------------------------------------------------------
+       Return a value from the DoublyLinkedList at a given position.
+
+       Precondition: pos is the position where data is to be retrieved from.
+       Postcondition: DLLType data at pos is returned
+    -----------------------------------------------------------------------*/
+
+    int search(DLLType);
+
+    /*----------------------------------------------------------------------
+       Search for a value in the DoublyLinkedList
+
+       Precondition: data is the value to be searched for
+       Postcondition: position of first occurence of data is returned if
+                      found, -1 is returned otherwise.
+    -----------------------------------------------------------------------*/
+
+    int size() const;
+
+    /*----------------------------------------------------------------------
+       Return size of the DoublyLinkedList
+
+       Precondition: None
+       Postcondition: mySize is returned.
+    -----------------------------------------------------------------------*/
 
     /***** output *****/
     void display(ostream&);
     /*----------------------------------------------------------------------
-        Display a list.
-    
+        Display a DoublyLinkedList.
+
         Precondition: The ostream out is open.
-    Postcondition: The list represented by this List object has been
-    inserted into out.
+        Postcondition: The content of DoublyLinkedList is displayed in a
+                       well formatted manner.
     -----------------------------------------------------------------------*/
 
 private:
     class DNode { // Inner class definition of node structure
     public:
-        DNode(const ElementType&);
-        ElementType data;
-        DNode* next;
-        DNode* prev;
+        DNode(const DLLType&);
+        /*----------------------------------------------------------------------
+           Constructs a new DNode
+
+           Precondition: data is the content of DNode to be constructed
+           Postcondition: new DNode is constructed with next and prev pointing
+                          to null and data set to the given
+        -----------------------------------------------------------------------*/
+        DLLType data; // content of DNode
+        DNode* next;  // pointer to the next DNode
+        DNode* prev;  // pointer to the previous DNode
     };
     typedef DNode* DNodePtr;
 
     /********Data Members ********/
-    int mySize;
-    DNodePtr myFirst;
-
+    int mySize;       // size of the DoublyLinkedList
+    DNodePtr myFirst; // pointer to the first DNode
 
 }; //---- end of List class
 
@@ -137,5 +178,3 @@ private:
 ostream& operator<<(ostream&, DoublyLinkedList&);
 istream& operator>>(istream&, DoublyLinkedList&);
 #endif
-
-
