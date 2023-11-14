@@ -1,33 +1,63 @@
 #ifndef COURSE_H
 #define COURSE_H
 
-#include <string>
+#include "Student.h"
 #include <iostream>
+#include <istream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
-class Course{
+class Course {
 public:
+    Course();
+
     Course(char*, string, int, int);
-    Course(const Course &course);
-    string getCode();
-    string getTitle();
-    int getCapacity();
-    int getCredits();
-    int getEnrolled();
-    void addStudent(const Student&);
-    void dropStudent(const Student&);
+
+    Course(const Course& course);
+
+    void setCode(char[7]);
+
+    void setTitle(string);
+
+    void setCapacity(int);
+
+    void setCredits(int);
+
+    string getCode() const;
+
+    string getTitle() const;
+
+    int getCapacity() const;
+
+    int getCredits() const;
+
+    int getEnrolled() const;
+
+    void addStudent(Student*);
+
+    void dropStudent(Student*);
+
     bool isFull() const;
+
+    bool operator==(const Course& other);
+
     ostream& displayCourse(ostream&) const;
+
     ostream& displayRegisteredStudents(ostream&) const;
-    
+
 private:
-    char* code[7];
+    char code[8];
     string title;
     int credits;
     int enrolled;
     int capacity;
+    vector<Student*> enrolledStudents;
 };
+
 #endif /* COURSE_H */
 
 ostream& operator<<(ostream&, Course&);
+
+istream& operator>>(istream&, Course&);
