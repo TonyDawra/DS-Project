@@ -56,8 +56,8 @@ private:
     vector<Student*> enrolledStudents;
 };
 
-#endif /* COURSE_H */
-
 ostream& operator<<(ostream&, Course&);
 
 istream& operator>>(istream&, Course&);
+
+#endif /* COURSE_H */
