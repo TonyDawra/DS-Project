@@ -7,14 +7,14 @@
 int Student::nbOfstds = 0;
 
 // Default Constructor
-Student::Student() : id(""), firstname(""), lastname(""), gpa(0.0), major("") {
+Student::Student() : id(""), firstname(""), lastname(""), gpa(0.0), major("computer science") {
     nbOfstds++;
 }
 
 // Constructor with all parameters: ID, First Name, Last Name, GPA, and Major
 Student::Student(const string& id, const string& firstname = "",
     const string& lastname = "", double gpa = 0.0,
-    string major = "")
+    string major = "computer science")
     : id(id), firstname(firstname), lastname(lastname), gpa(gpa), major(major) {
     nbOfstds++;
 }
