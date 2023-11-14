@@ -8,12 +8,12 @@ This header file defines the LListWithDummyNode data type.
     no-arg constructor         : Constructs a default LListWithDummyNode
     copy constructor           : Constructs a new LListWithDummyNode using existing LListWithDummyNode parameter 
     destructor                 : Deletes a LListWithDummyNode 
-    isEmpty		           : Checks whether or not LListWithDummyNode is empty 
+    isEmpty		          : Checks whether or not LListWithDummyNode is empty 
     getmySize                  : gets and return mySize
     search                     : Checks whether inputted data exists in LListWithDummyNode 
     insertAtPosition           : Inserts data at certain position of LListWithDummyNode 
     insertAtEnd                : Inserts data at end of LListWithDummyNode 
-    insertAtBeginning	      : Inserts data at beginning of LListWithDummyNode 
+    insertAtBeginning	   : Inserts data at beginning of LListWithDummyNode 
     display                    : Displays content of the LListWithDummyNode
     at                         : Retrieve element at a given position
 ...
@@ -136,4 +136,5 @@ public:
 ostream& operator<<(ostream&, ElementType&);
 // Prototype of input operator
 istream& operator>>(istream&, ElementType&);
+
 #endif /* ARRAYLIST_H */
