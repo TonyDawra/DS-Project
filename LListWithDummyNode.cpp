@@ -1,124 +1,172 @@
 #include "LListWithDummyNode.h"
+#include "Student.h"
 #include <iostream>
+#include <ostream>
 using namespace std;
 
-LListWithDummyNode::Node::Node(const ElementType& data){
-    this->data=data;
-    next=NULL;
+//--- Definition of Node constructor
+LListWithDummyNode::Node::Node(const ElementType& data) {
+    this->data = data;
+    next = NULL;
+}
 
+LListWithDummyNode::Node::Node() : next(NULL) {}
+
+//--- Definition of class constructor
+LListWithDummyNode::LListWithDummyNode() {
+    myFirst = new Node();
+    myFirst->next = NULL;
+    mySize = 0;
 }
-LListWithDummyNode::LListWithDummyNode(){
-    myFirst=new Node (ElementType& course);
-    myFirst->next=NULL;
-    mySize=0;
-}
-LListWithDummyNode::LListWithDummyNode(const LListWithDummyNode& orig){
-    if(isEmpty()){
-        LListWithDummyNode()
+
+ElementType LListWithDummyNode::at(int pos) {
+    //check if position is accepted
+    if (pos >= getmySize() || pos < 0) {
+        cerr << "Out of bound";
+        return NULL;
     }
-    myFirst = new Node(orig.myFirst->data)
+
+    NodePtr tempPtr = myFirst;
+    tempPtr = tempPtr->next;
+
+    while (pos--) {
+        tempPtr = tempPtr->next;
+    }
+
+    return tempPtr->data;
+}
+//--- Definition of copy constructor
+LListWithDummyNode::LListWithDummyNode(const LListWithDummyNode& orig) {
+    if (isEmpty()) { // If the original list is empty, create an empty list
+        LListWithDummyNode();
+    }
+
+    myFirst = new Node(orig.myFirst->data); // // Copy the dummy node
     NodePtr tempPtr = orig.myFirst->next;
     NodePtr loopingNode = myFirst;
+//--- Copy each node in the original list
     while (tempPtr != NULL) {
         loopingNode->next = new Node(tempPtr->data);
-        tempPtr=tempPtr->next;
-        loopingNode=loopingNode->next;
+        tempPtr = tempPtr->next;
+        loopingNode = loopingNode->next;
     }
-    mySize=orig.mySize;
+    mySize = orig.mySize;
 }
-LListWithDummyNode::~LListWithDummyNode(){
-    if(!isEmpty()){
-    NodePtr tempPtr=myFirst->next;
+//--- Definition of class destructor
+LListWithDummyNode::~LListWithDummyNode() {
+    if (!isEmpty()) {
+        NodePtr tempPtr = myFirst->next;
 
-    while (tempPtr->next != NULL) {
-        myFirst->next = tempPtr->next;
-        delete tempPtr;
-        tempPtr = myFirst->next;
+//--- Traverse the list and delete each node
+        while (tempPtr->next != NULL) {
+            myFirst->next = tempPtr->next;
+            delete tempPtr;
+            tempPtr = myFirst->next;
+        }
+        delete tempPtr; // delete last node
+        mySize = 0;
     }
-    delete tempPtr;
-    mySize=0;
 }
-}
-bool LListWithDummyNode::isEmpty()const{
-    return myFirst->next==NULL;
-}
-int LListWithDummyNode::getmySize(){
-    return mySize;
-}
-bool LListWithDummyNode::insertAtPosition(const ElementType& course,int pos){
-    if(pos>mySize || pos<0){
-        cout<<"invalid position";
-        return false
+
+//--- Definition of empty()
+bool LListWithDummyNode::isEmpty() const { return myFirst->next == NULL; }
+
+//--- Definition of getmySize()
+int LListWithDummyNode::getmySize() const { return mySize; }
+
+//--- Definition of insertAtPosition()
+bool LListWithDummyNode::insertAtPosition(const ElementType& course, int pos) {
+   //check if position is accepted
+    if (pos > mySize || pos < 0) {
+        cout << "invalid position";
+        return false;
     }
-    if(isEmpty()&&pos==0){
-        NodePtr newPtr=new Node(course);
-        myFirst->next=newPtr;
+    // If the list is empty and position is 0, insert at the beginning
+    if (isEmpty() && pos == 0) {
+        NodePtr newPtr = new Node(course);
+        myFirst->next = newPtr;
         mySize++;
         return true;
     }
-    if(pos==0){
-        NodePtr newPtr=new Node(course);
-        newPtr->next= myFirst->next;
-        myFirst->next=newPtr;
+    if (pos == 0) {
+        // If position is 0, insert at the beginning
+        NodePtr newPtr = new Node(course);
+        newPtr->next = myFirst->next;
+        myFirst->next = newPtr;
         mySize++;
         return true;
     }
-    NodePtr tempPtr=myFirst->next;
+    NodePtr tempPtr = myFirst->next;
     for (int i = 0; i < pos - 1; i++) {
-		tempPtr = tempPtr->next;
-        if(tempPtr->next==NULL){
-            return false;
-        }
-}
-    NodePtr newPtr=new Node(course);
-    newPtr->next=tempPtr->next;
-    tempPtr->next=newPtr;
-    mySize++;
+        // Traverse to the node before the specified position
+        tempPtr = tempPtr->next;
+    }
+    NodePtr newPtr = new Node(course);
+    newPtr->next = tempPtr->next;
+    tempPtr->next = newPtr;
+    mySize++; //Increment size
     return true;
+}
 
+//--- Definition of insertAtEnd()
+bool LListWithDummyNode::insertAtEnd(const ElementType& course) {
+    // Insert at the end by using the list size as the position
+    return insertAtPosition(course, mySize);
 }
-bool LListWithDummyNode::insertAtEnd(const ElementType& course){
-    return insertAtPosition(course,mySize);
+
+//--- Definition of insertAtBrginning()
+bool LListWithDummyNode::insertAtBeginning(const ElementType& course) {
+    // Insert at beginning
+    return insertAtPosition(course, 0);
 }
-bool LListWithDummyNode::insertAtBeginning(const ElementType& course){
-    return insertAtPosition(course,0);
-}
-int LListWithDummyNode::search(const ElementType& course){
-    NodePtr tempPtr= myFirst->next;
-    int pos=0;
-    while(tempPtr!= NULL){
-        if(tempPtr->data==course){
-            return pos;
+
+//--- Definition of search()
+int LListWithDummyNode::search(const ElementType& course) {
+    NodePtr tempPtr = myFirst->next;
+    int pos = 0;
+    while (tempPtr != NULL) {
+        // Traverse the list and compare each element with the specified course
+        if (tempPtr->data == course) {
+            return pos; //return if found
         }
-        tempPtr=tempPtr->next;
+        tempPtr = tempPtr->next;
         pos++;
     }
-    return -1;
+    return -1; //return -1 if not found
 }
-void LListWithDummyNode::display(ostream& out){
-    if(isEmpty()){
-        cout<<"Empty List";
-    }else{
+
+//--- Definition of display()
+ostream& LListWithDummyNode::display(ostream& out) const {
+    if (isEmpty()) {
+        cout << "Empty List";
+    }
+    else {
         NodePtr current = myFirst->next;
-        cout << "The list is: ";
         while (current != NULL) {
-            out << "The list is: " << current->data << " ";
+            // Display each element in the list
+            out << *(current->data) << "\n";
             current = current->next;
         }
         cout << endl;
     }
+
+    return out;
 }
-ostream& operator<<(ostream& out,const LListWithDummyNode& course){
+
+//--- Definition of output operator
+ostream& operator<<(ostream& out, const LListWithDummyNode& course) {
     return course.display(out);
 }
-istream& operator>>(istream in ,const LListWithDummyNode& course){
+
+//--- Definition of input operator
+istream& operator>>(istream& in, LListWithDummyNode& course) {
     int numCourses;
-    cout<<"Enter the number of courses you want to add: ";
-    cin>>numCourses;
-    ElementType course;
-    for(int i=0;i<numCourses;i++){
-        in>>course;
-        course.insertAtEnd(in);
-}
-return in;
+    cout << "Enter the number of courses you want to add: ";
+    in >> numCourses;
+    ElementType insertedCourse = new Course();
+    for (int i = 0; i < numCourses; i++) {
+        in >> *insertedCourse;
+        course.insertAtEnd(insertedCourse);
+    }
+    return in;
 }
