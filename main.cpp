@@ -191,7 +191,6 @@ void displayRegisteredStudentsWithCourses(
 void displayCoursesWithRegisteredStudents(LListWithDummyNode& offeredCourses) {
     for (int i = 0; i < offeredCourses.getmySize(); i++) {
         Course* course = offeredCourses.at(i);
-        //cout << "Course: " << course->getCode() << " - " << course->getTitle() << endl;
         course->displayRegisteredStudents(cout);
     }
 }
