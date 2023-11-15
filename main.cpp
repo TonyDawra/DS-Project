@@ -372,7 +372,7 @@ void displayStudentInfo(DoublyLinkedList& RegisteredStudents) {
     }
 
     cout << "Student : \n\tID: " << student->getid()
-        << "\n\tName: " << student->getfirstname() << "," << student->getlastname()
+        << "\n\tName: " << student->getfirstname() << " " << student->getlastname()
         << "\n\tMajor: " << student->getmajor() << "\n\tGPA: " << student->getGPA();
 
     cout << endl;
