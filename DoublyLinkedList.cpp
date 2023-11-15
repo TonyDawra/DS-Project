@@ -11,10 +11,12 @@ DoublyLinkedList::DNode::DNode(const DLLType& data)
 
 DoublyLinkedList::DoublyLinkedList() : myFirst(0), mySize(0) {}
 
+//Implementation of size()
 int DoublyLinkedList::size() const {
     return mySize;
 }
 
+//Implementation of Copy Constructor
 DoublyLinkedList::DoublyLinkedList(const DoublyLinkedList& orig) {
     if (!orig.isEmpty()) {
         myFirst = new DNode(orig.myFirst->data);
@@ -30,6 +32,7 @@ DoublyLinkedList::DoublyLinkedList(const DoublyLinkedList& orig) {
     }
 }
 
+//Implementation of destructor
 DoublyLinkedList::~DoublyLinkedList() {
     if (!isEmpty()) {
         DNodePtr tempPtr = myFirst;
@@ -43,18 +46,18 @@ DoublyLinkedList::~DoublyLinkedList() {
     }
 }
 
+//Implementation of insertAtPos
 bool DoublyLinkedList::insertAtPos(DLLType& data, int p) {
     if (p > mySize || p < 0) {
         cout << "invalid position";
         return false;
     }
-    if (isEmpty()) {
-        cout << data;
+    if (isEmpty()) {            // Insert in an empty list
         myFirst = new DNode(data);
     }
     else {
         DNodePtr tempNode = new DNode(data);
-        if (p == 0) {
+        if (p == 0) {           //Insert at beginning
             tempNode->next = myFirst;
             myFirst->prev = tempNode;
             myFirst = tempNode;
@@ -66,11 +69,11 @@ bool DoublyLinkedList::insertAtPos(DLLType& data, int p) {
             for (int i = 0; i < p - 1; i++) {
                 tempPtr = tempPtr->next;
             }
-            if (mySize == p) {
+            if (mySize == p) {  //Insert at end
                 tempPtr->next = tempNode;
                 tempNode->prev = tempPtr;
             }
-            else {
+            else {              //Insert at centre
                 tempNode->next = tempPtr->next;
                 tempPtr->next = tempNode;
                 tempNode->next->prev = tempNode;
@@ -81,16 +84,21 @@ bool DoublyLinkedList::insertAtPos(DLLType& data, int p) {
     mySize++;
     return true;
 }
+
+//Implementation of insertAtBeginning
 bool DoublyLinkedList::insertAtBeginning(DLLType& data) {
     return insertAtPos(data, 0);
 }
+
+//Implementation of insertAtEnd
 bool DoublyLinkedList::insertAtEnd(DLLType& data) {
     return insertAtPos(data, mySize);
 }
 
+//Implementation of deleteAtPos
 bool DoublyLinkedList::deleteAtPos(int p) {
     if (p > mySize || p < 0) {
-        cout << "invalid position";
+        cout << "Invalid position";
         return false;
     }
     else if (isEmpty()) {
@@ -98,10 +106,10 @@ bool DoublyLinkedList::deleteAtPos(int p) {
         return false;
     }
     else {
-        if (p == 0 && mySize == 1) {
+        if (p == 0 && mySize == 1) {    //deletion at beginning with one element
             delete myFirst;
         }
-        else if (p == 0) {
+        else if (p == 0) {              //deletion at beginning with >1 elements
             myFirst = myFirst->next;
             delete myFirst->prev;
         }
@@ -110,10 +118,10 @@ bool DoublyLinkedList::deleteAtPos(int p) {
             for (int i = 0; i < p - 1; i++) {
                 PredPtr = PredPtr->next;
             }
-            if (p == mySize - 1) {
+            if (p == mySize - 1) {     //deletion at end
                 delete PredPtr->next;
             }
-            else {
+            else {                     //deletion at centre
                 PredPtr->next = PredPtr->next->next;
                 delete PredPtr->next->prev;
                 PredPtr->next->prev = PredPtr;
@@ -124,6 +132,7 @@ bool DoublyLinkedList::deleteAtPos(int p) {
     return true;
 }
 
+//Implementation of search method
 int DoublyLinkedList::search(DLLType data) {
     DNodePtr tempPtr = myFirst;
     int i = 0;
@@ -137,8 +146,9 @@ int DoublyLinkedList::search(DLLType data) {
     return -1;
 }
 
+//Implementation of at method
 DLLType DoublyLinkedList::at(int pos) {
-    if (pos >= size() || pos < 0) {
+    if (pos >= mySize || pos < 0) {      //Check pos validity
         cerr << "Position out of bounds";
         return NULL;
     }
@@ -151,6 +161,7 @@ DLLType DoublyLinkedList::at(int pos) {
     return temp->data;
 }
 
+//Implementation of display
 void DoublyLinkedList::display(ostream& out) {
     if (isEmpty()) {
         out << "\nThe list is empty\n";
@@ -164,10 +175,14 @@ void DoublyLinkedList::display(ostream& out) {
         out << endl;
     }
 }
+
+//Overloading the output operator
 ostream& operator<<(ostream& out, DoublyLinkedList& L) {
     L.display(out);
     return out;
 }
+
+//Overloading the input operator
 istream& operator>>(istream& in, DoublyLinkedList& L) {
     int numOfStudents;
     cout << "Enter the number of courses you want to add: ";

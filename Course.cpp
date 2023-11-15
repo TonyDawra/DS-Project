@@ -101,7 +101,7 @@ void Course::dropStudent(Student* student) {
 }
 
 ostream& Course::displayCourse(ostream& out) const {
-    out << getCode() << '\t' << getTitle() << "\t\t\t\t\t\t\t" << getCredits() << '\t'
+    out << getCode() << '\t' << getTitle() << '\'t' << getCredits() << '\t'
         << getEnrolled() << '\t' << getCapacity() << endl;
     return out;
 }
@@ -146,7 +146,7 @@ istream& operator>>(istream& in, Course& course) {
 }
 
 ostream& operator<<(ostream& out, Course& course) {
-    out << course.getCode() << '\t' << course.getTitle() << '\t' << course.getCredits() << '\t' << course.getEnrolled()
-        << '\t' << course.getCapacity();
+    out << course.getCode() << '\t' << left << setw(25) << course.getTitle() << "\t" << course.getCredits() << "\t\t" << course.getEnrolled()
+        << "\t\t" << course.getCapacity();
     return out;
 }
