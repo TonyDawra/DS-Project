@@ -1,3 +1,4 @@
+//Implementation file for the member functions of class Course
 #include "Course.h"
 #include "Student.h"
 #include <algorithm>
@@ -20,11 +21,25 @@ Course::Course(char cCode[7], string cTitle, int credit, int cap) {
     code[7] = '\0';
 }
 
+Course::Course(const Course &orig) {
+    title = orig.title;
+    credits = orig.credits;
+
+    enrolled = orig.enrolled;
+    capacity = orig.capacity;
+    for (int i = 0; i < 8; i++)
+        code[i] = orig.code[i];
+}
+
 void Course::setCode(char code[7]) {
     for (int i = 0; i < 7; i++) {
         this->code[i] = code[i];
     }
     this->code[7] = '\0';
+}
+
+void Course::setTitle(string title) {
+    this->title = title;
 }
 
 void Course::setCredits(int credits) {
@@ -36,7 +51,6 @@ void Course::setCredits(int credits) {
     this->credits = credits;
 }
 
-void Course::setTitle(string title) { this->title = title; }
 
 void Course::setCapacity(int capacity) {
     if (capacity < enrolledStudents.size()) {
@@ -47,17 +61,29 @@ void Course::setCapacity(int capacity) {
     this->capacity = capacity;
 }
 
-Course::Course(const Course& orig) {
-    title = orig.title;
-    credits = orig.credits;
 
-    enrolled = orig.enrolled;
-    capacity = orig.capacity;
-    for (int i = 0; i < 8; i++)
-        code[i] = orig.code[i];
+
+string Course::getCode() const {
+    return code;
 }
 
-bool Course::operator==(const Course& other) {
+string Course::getTitle() const {
+    return title;
+}
+
+int Course::getCapacity() const {
+    return capacity;
+}
+
+int Course::getCredits() const {
+    return credits;
+}
+
+int Course::getEnrolled() const {
+    return enrolledStudents.size();
+}
+
+bool Course::operator==(const Course &other) {
     for (int i = 0; i < 7; i++) {
         if (other.code[i] != code[i])
             return false;
@@ -65,19 +91,11 @@ bool Course::operator==(const Course& other) {
     return true;
 }
 
-string Course::getCode() const { return code; }
+bool Course::isFull() const {
+    return enrolledStudents.size() == capacity;
+}
 
-string Course::getTitle() const { return title; }
-
-int Course::getCapacity() const { return capacity; }
-
-int Course::getCredits() const { return credits; }
-
-int Course::getEnrolled() const { return enrolledStudents.size(); }
-
-bool Course::isFull() const { return enrolledStudents.size() == capacity; }
-
-void Course::addStudent(Student* student) {
+void Course::addStudent(Student *student) {
     if (isFull()) {
         cerr << "course is full";
         return;
@@ -87,12 +105,12 @@ void Course::addStudent(Student* student) {
     enrolledStudents.push_back(student);
 }
 
-void Course::dropStudent(Student* student) {
+void Course::dropStudent(Student *student) {
     auto toRemove =
-        find(enrolledStudents.begin(), enrolledStudents.end(), student);
+            find(enrolledStudents.begin(), enrolledStudents.end(), student);
 
     if (toRemove == enrolledStudents.end()) {
-        cerr << "Student not in course\n";
+        cerr << "Student not in course";
         return;
     }
 
@@ -100,21 +118,21 @@ void Course::dropStudent(Student* student) {
     enrolledStudents.erase(toRemove);
 }
 
-ostream& Course::displayCourse(ostream& out) const {
-    out << getCode() << '\t' << getTitle() << '\'t' << getCredits() << '\t'
+ostream &Course::displayCourse(ostream &out) const {
+    out << getCode() << '\t' << getTitle() << '\t' << getCredits() << '\t'
         << getEnrolled() << '\t' << getCapacity() << endl;
     return out;
 }
 
-ostream& Course::displayRegisteredStudents(ostream& out) const {
+ostream &Course::displayRegisteredStudents(ostream &out) const {
     out << "Course: " << getCode() << "-" << getTitle() << endl;
-    for (Student* s : enrolledStudents) {
-        out << s->getid() << " " << s->getlastname() << ", " << s->getfirstname() << endl;
+    for (Student *s: enrolledStudents) {
+        out << s->getid() << " " << s->getlastname() << ", " << s->getfirstname()  << endl;
     }
     return out;
 }
 
-istream& operator>>(istream& in, Course& course) {
+istream &operator>>(istream &in, Course &course) {
     char code[8];
     for (int i = 0; i < 7; ++i) {
         in >> code[i];
@@ -126,8 +144,8 @@ istream& operator>>(istream& in, Course& course) {
     string title;
     in >> ws;
 
-    while (!isdigit(in.peek())) {
-        title += (char)in.get();
+    while (!isdigit(in.peek())){
+        title += (char) in.get();
     }
 
     course.setTitle(title);
@@ -145,8 +163,8 @@ istream& operator>>(istream& in, Course& course) {
     return in;
 }
 
-ostream& operator<<(ostream& out, Course& course) {
-    out << course.getCode() << '\t' << left << setw(25) << course.getTitle() << "\t" << course.getCredits() << "\t\t" << course.getEnrolled()
-        << "\t\t" << course.getCapacity();
+ostream &operator<<(ostream &out, Course &course) {
+    out << course.getCode() << '\t' << course.getTitle() << '\t' << course.getCredits() << '\t' << course.getEnrolled()
+        << '\t' << course.getCapacity();
     return out;
 }
