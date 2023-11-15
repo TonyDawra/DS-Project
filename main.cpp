@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// Function prototypes
 void displayMenu();
 
 void handleUserInput(int choice, DoublyLinkedList& nonRegisteredStudents,
@@ -36,28 +37,37 @@ void registerStudent(DoublyLinkedList& nonRegisteredStudents,
 void addOrDropStudent(DoublyLinkedList& nonRegisteredStudents, DoublyLinkedList& RegisteredStudents,
     LListWithDummyNode& offeredCourses);
 
+// Main function
 int main() {
+
+    // Declare and initialize lists for nonRegisteredStudents, RegisteredStudents, and offeredCourses
     DoublyLinkedList nonRegisteredStudents;
     DoublyLinkedList RegisteredStudents;
     LListWithDummyNode offeredCourses;
 
+    // Input file streams for student.txt and course.txt data
     ifstream inputFileStudent, inputFileCourse;
     ofstream outputFile;
 
+    // Opening the student.txt
     inputFileStudent.open("student.txt");
 
+    // Checking if it did open if not send error message
     if (inputFileStudent.fail()) {
         cerr << "student.txt could not open\n";
         return 1;
     }
 
+    // Opening the couses.txt
     inputFileCourse.open("courses.txt");
 
+    // Checking if it did open if not send error message
     if (inputFileCourse.fail()) {
         cerr << "course.txt could not open\n";
         return 1;
     }
 
+    // Reading the first line from student.txt and declare and initialize numberOfStudents
     int numberOfStudents;
     inputFileStudent >> numberOfStudents;
     for (int i = 0; i < numberOfStudents; ++i) {
@@ -67,6 +77,7 @@ int main() {
     }
     inputFileStudent.close();
 
+    // Reading the first line from student.txt and declare and initialize numberOfCourses
     int numberOfCourses;
     inputFileCourse >> numberOfCourses;
     for (int j = 0; j < numberOfCourses; ++j) {
@@ -78,6 +89,7 @@ int main() {
 
     int choice = 0;
 
+    // DisplayMenu and handleUserInput until the users decides to quit
     do {
         displayMenu();
         cin >> choice;
@@ -88,6 +100,7 @@ int main() {
     return 0;
 }
 
+// Function display menu
 void displayMenu() {
     cout << "1. Display the list of non-registered students.\n";
     cout << "2. Display the list of offered courses.\n";
@@ -104,7 +117,7 @@ void displayMenu() {
     cout << "Enter your choice: ";
 }
 
-
+// Function to handle user input and his executes the choice of the user
 void handleUserInput(int choice, DoublyLinkedList& nonRegisteredStudents,
     DoublyLinkedList& RegisteredStudents,
     LListWithDummyNode& offeredCourses) {
@@ -147,10 +160,12 @@ void handleUserInput(int choice, DoublyLinkedList& nonRegisteredStudents,
     }
 }
 
+// Function to display the list of non-registered students
 void displayListOfNonRegisteredStudents(
     DoublyLinkedList& nonRegisteredStudents) {
 
     cout << "Students that did not register yet:" << endl;
+    // Checking if nonRegisteredStudents isEmpty
     if (nonRegisteredStudents.isEmpty()) {
         cout << "All students are registered" << endl;
         return;
@@ -163,8 +178,10 @@ void displayListOfNonRegisteredStudents(
     nonRegisteredStudents.display(cout);
 }
 
+// Function to display the list of offered courses
 void displayListOfOfferedCourses(LListWithDummyNode& offeredCourses) {
 
+// Checking if offeredCourses isEmpty if not display error message
     if (offeredCourses.isEmpty()) {
         cout << "No course are being offered" << endl;
         return;
@@ -179,6 +196,7 @@ void displayListOfOfferedCourses(LListWithDummyNode& offeredCourses) {
     offeredCourses.display(cout);
 }
 
+// Function to display the list of registered students with their registered courses
 void displayRegisteredStudentsWithCourses(
     DoublyLinkedList& RegisteredStudents) {
     for (int i = 0; i < RegisteredStudents.size(); i++) {
@@ -188,20 +206,23 @@ void displayRegisteredStudentsWithCourses(
     }
 }
 
+// Function to display the list of courses with their registered students
 void displayCoursesWithRegisteredStudents(LListWithDummyNode& offeredCourses) {
     for (int i = 0; i < offeredCourses.getmySize(); i++) {
         Course* course = offeredCourses.at(i);
-        //cout << "Course: " << course->getCode() << " - " << course->getTitle() << endl;
         course->displayRegisteredStudents(cout);
     }
 }
 
+// Function to display the registered courses for a specific student
 void displayRegisteredCoursesForStudent(DoublyLinkedList& RegisteredStudents) {
     string id;
     cout << "Enter the student id: ";
     cin >> id;
 
     Student* student = nullptr;
+
+    // Search for the student in the RegisteredStudents list
     for (int i = 0; i < RegisteredStudents.size(); ++i) {
         student = RegisteredStudents.at(i);
         if (student->getid() == id) {
@@ -210,6 +231,7 @@ void displayRegisteredCoursesForStudent(DoublyLinkedList& RegisteredStudents) {
         student = NULL;
     }
 
+    // If the student is not found display an error message
     if (student == NULL) {
         cout << "Student not registered in any courses.\n";
         return;
@@ -220,16 +242,20 @@ void displayRegisteredCoursesForStudent(DoublyLinkedList& RegisteredStudents) {
     cout << endl;
 }
 
+// Function to display students enrolled in a specific course
 void displayStudentsInCourse(LListWithDummyNode& offeredCourses) {
     char code[8]{};
     cout << "Enter the course: ";
 
+    // Input the course code
     for (int i = 0; i < 7; i++) {
         cin >> code[i];
     }
     code[7] = '\0';
 
     Course* course = nullptr;
+
+    // Search for the course in the offeredCourses list
     for (int i = 0; i < offeredCourses.getmySize(); ++i) {
         course = offeredCourses.at(i);
 
@@ -240,6 +266,7 @@ void displayStudentsInCourse(LListWithDummyNode& offeredCourses) {
         course = NULL;
     }
 
+    // If the course is not found display an error message
     if (course == NULL) {
         cerr << "Course does not exist\n";
         return;
@@ -247,6 +274,7 @@ void displayStudentsInCourse(LListWithDummyNode& offeredCourses) {
     course->displayRegisteredStudents(cout);
 }
 
+// Function to display information about a specific student
 void displayStudentInfo(DoublyLinkedList& RegisteredStudents) {
     string id;
     cout << "Enter the student ID: ";
@@ -255,6 +283,8 @@ void displayStudentInfo(DoublyLinkedList& RegisteredStudents) {
     s.setid(id);
 
     Student* student = nullptr;
+
+    // Search for the student in the RegisteredStudents list
     for (int i = 0; i < RegisteredStudents.size(); ++i) {
         student = RegisteredStudents.at(i);
 
@@ -265,6 +295,7 @@ void displayStudentInfo(DoublyLinkedList& RegisteredStudents) {
         student = NULL;
     }
 
+    // If the student is not found display an error message
     if (student == NULL) {
         cerr << "Student not found.\n";
         return;
@@ -277,6 +308,7 @@ void displayStudentInfo(DoublyLinkedList& RegisteredStudents) {
     cout << endl;
 }
 
+// Function to register a student in courses
 void registerStudent(DoublyLinkedList& nonRegisteredStudents,
     DoublyLinkedList& RegisteredStudents,
     LListWithDummyNode& offeredCourses) {
@@ -287,6 +319,7 @@ void registerStudent(DoublyLinkedList& nonRegisteredStudents,
 
     Student* student = nullptr;
 
+    // Search for the student in the nonRegisteredStudents list
     for (int i = 0; i < nonRegisteredStudents.size(); ++i) {
         student = nonRegisteredStudents.at(i);
 
@@ -299,6 +332,7 @@ void registerStudent(DoublyLinkedList& nonRegisteredStudents,
     int pos = nonRegisteredStudents.search(student);
     bool isRegistered = false;
 
+    // If the student is not found in nonRegisteredStudents search in RegisteredStudents
     if (student == NULL) {
         for (int i = 0; i < RegisteredStudents.size(); ++i) {
             student = RegisteredStudents.at(i);
@@ -316,7 +350,7 @@ void registerStudent(DoublyLinkedList& nonRegisteredStudents,
         }
     }
 
-
+    // infinite Loop to register the student in one or more courses until the users enter not to continue
     while (true) {
 
         string code;
@@ -324,6 +358,8 @@ void registerStudent(DoublyLinkedList& nonRegisteredStudents,
         cin >> code;
 
         Course* course = nullptr;
+
+        // Search for the course in the offeredCourses list
         for (int i = 0; i < offeredCourses.getmySize(); ++i) {
             course = offeredCourses.at(i);
 
@@ -332,25 +368,31 @@ void registerStudent(DoublyLinkedList& nonRegisteredStudents,
             }
             course = NULL;
         }
+
+        // If the course is not found display an error message
         if (course == NULL) {
             cout << "The course is not offered\n";
             continue;
         }
 
+        // Add the student to the course
         course->addStudent(student);
         cout << "Student registerd.\n" << endl;
 
+        // Ask the user if they want to add more courses
         cout << "Do you need to add more courses [Y] yes or [N] no: ";
 
         char choice = 'Y';
         cin >> choice;
 
+        // Checking if the user want to continue
         if (choice == 'Y' || choice == 'y') continue;
         if (choice == 'N' || choice == 'n') break;
         cout << "Invalid choice, breaking operation";
         break;
     }
 
+    // If the student was initially non-registered, update the lists
     if (!isRegistered) {
         nonRegisteredStudents.deleteAtPos(pos);
 
@@ -358,7 +400,7 @@ void registerStudent(DoublyLinkedList& nonRegisteredStudents,
     }
 }
 
-
+// Function to add or drop a student from courses
 void addOrDropStudent(DoublyLinkedList& nonRegisteredStudents, DoublyLinkedList& RegisteredStudents,
     LListWithDummyNode& offeredCourses) {
     string id;
@@ -366,6 +408,8 @@ void addOrDropStudent(DoublyLinkedList& nonRegisteredStudents, DoublyLinkedList&
     cin >> id;
 
     Student* student = nullptr;
+
+    // Search for the student in the nonRegisteredStudents list
     for (int i = 0; i < nonRegisteredStudents.size(); ++i) {
         student = nonRegisteredStudents.at(i);
 
@@ -378,6 +422,7 @@ void addOrDropStudent(DoublyLinkedList& nonRegisteredStudents, DoublyLinkedList&
     int pos = nonRegisteredStudents.search(student);
     bool isRegistered = false;
 
+    // If the student is not found in nonRegisteredStudents search in RegisteredStudents
     if (student == NULL) {
         for (int i = 0; i < RegisteredStudents.size(); ++i) {
             student = RegisteredStudents.at(i);
@@ -394,14 +439,18 @@ void addOrDropStudent(DoublyLinkedList& nonRegisteredStudents, DoublyLinkedList&
         }
     }
 
+    // Loop to add or drop courses for the student until the uses says otherwise
     while (true) {
         char choice;
         cout << "Add course [A] or Drop course [D]: ";
         cin >> choice;
 
+        // Check if the user choice is to add a course
         if (choice == 'A' || choice == 'a') {
             char code[8];
             cout << "Choose course code: ";
+            
+            // Input the course code
             for (int i = 0; i < 7; ++i) {
                 cin >> code[i];
             }
@@ -409,6 +458,7 @@ void addOrDropStudent(DoublyLinkedList& nonRegisteredStudents, DoublyLinkedList&
 
             Course* course = nullptr;
 
+            // Search for the course in the offeredCourses list
             for (int i = 0; i < offeredCourses.getmySize(); ++i) {
                 course = offeredCourses.at(i);
                 if (course->getCode() == string(code)) {
@@ -417,11 +467,13 @@ void addOrDropStudent(DoublyLinkedList& nonRegisteredStudents, DoublyLinkedList&
                 course = NULL;
             }
 
+            // If the course is not found display an error message
             if (course == NULL) {
                 cout << "Course not found." << endl;
                 cout << "Do you want to continue [Y] yes or [N] no: ";
                 cin >> choice;
 
+                // Checking if the user want to continue
                 if (choice == 'Y' || choice == 'y') {
                     continue;
                 }
@@ -430,6 +482,7 @@ void addOrDropStudent(DoublyLinkedList& nonRegisteredStudents, DoublyLinkedList&
                 }
             }
 
+            // Add the student to the course
             course->addStudent(student);
             cout << "Course added successfully." << endl;
 
@@ -438,9 +491,13 @@ void addOrDropStudent(DoublyLinkedList& nonRegisteredStudents, DoublyLinkedList&
                 RegisteredStudents.insertAtEnd(student);
             }
         }
+
+        // Check if the user choice is to drop a course
         else if (choice == 'D' || choice == 'd') {
             char code[8];
             cout << "Choose course code: ";
+
+            // Input the course code
             for (int i = 0; i < 7; ++i) {
                 cin >> code[i];
             }
@@ -448,6 +505,7 @@ void addOrDropStudent(DoublyLinkedList& nonRegisteredStudents, DoublyLinkedList&
 
             Course* course = nullptr;
 
+            // Search for the course in the offeredCourses list
             for (int i = 0; i < offeredCourses.getmySize(); ++i) {
                 course = offeredCourses.at(i);
 
@@ -457,11 +515,13 @@ void addOrDropStudent(DoublyLinkedList& nonRegisteredStudents, DoublyLinkedList&
                 course = NULL;
             }
 
+            // If the course is not found display an error message
             if (course == NULL) {
                 cout << "Course not found." << endl;
                 cout << "Do you want to continue [Y] yes or [N] no: ";
                 cin >> choice;
 
+                // Checking if the user want to continue
                 if (choice == 'Y' || choice == 'y') {
                     continue;
                 }
@@ -470,9 +530,14 @@ void addOrDropStudent(DoublyLinkedList& nonRegisteredStudents, DoublyLinkedList&
                 }
             }
 
+            // Drop the student from the course
             course->dropStudent(student);
+
+            // Check if the student is no longer registered in any courses
             vector<Course*> registered = student->getregisteredcourse();
             if (registered.empty()) {
+
+                // If not registered update the lists
                 pos = RegisteredStudents.search(student);
                 RegisteredStudents.deleteAtPos(pos);
 
@@ -482,6 +547,7 @@ void addOrDropStudent(DoublyLinkedList& nonRegisteredStudents, DoublyLinkedList&
             }
         }
 
+        // Ask the user if they want to continue
         cout << "Do you want to continue [Y] yes or [N] no: ";
         cin >> choice;
 
