@@ -186,8 +186,8 @@ istream &operator>>(istream &in, Course &course) {
 }
 
 //Overloaded output stream operator to display course information.
-ostream &operator<<(ostream &out, Course &course) {
-    out << course.getCode() << '\t' << course.getTitle() << '\t' << course.getCredits() << '\t' << course.getEnrolled()
-        << '\t' << course.getCapacity();
+ostream& operator<<(ostream& out, Course& course) {
+    out << course.getCode() << '\t' << left << setw(25) << course.getTitle() << "\t" << course.getCredits() << "\t\t" << course.getEnrolled()
+        << "\t\t" << course.getCapacity();
     return out;
 }

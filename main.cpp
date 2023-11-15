@@ -10,32 +10,102 @@ using namespace std;
 
 // Function prototypes
 void displayMenu();
+/*------------------------------------------------------------------------------
+  Display Menu
+
+  Precondition: None
+  Post-Condition: Menu is displayed.
+-------------------------------------------------------------------------------*/
 
 void handleUserInput(int choice, DoublyLinkedList& nonRegisteredStudents,
     DoublyLinkedList& RegisteredStudents,
     LListWithDummyNode& offeredCourses);
+/*------------------------------------------------------------------------------
+  Handles user input
+
+  Precondition: None
+  Post-Condition: Desired action of user is executed
+-------------------------------------------------------------------------------*/
 
 void displayListOfNonRegisteredStudents(
     DoublyLinkedList& nonRegisteredStudents);
+/*------------------------------------------------------------------------------
+  Display list of non-registered students
+
+  Precondition: None
+  Post-Condition: List of non-registered students is displayed
+-------------------------------------------------------------------------------*/
 
 void displayListOfOfferedCourses(LListWithDummyNode& offeredCourses);
+/*------------------------------------------------------------------------------
+  Display list of offered courses
+
+  Precondition: None
+  Post-Condition: List of offered courses is displayed
+-------------------------------------------------------------------------------*/
 
 void displayRegisteredStudentsWithCourses(DoublyLinkedList& RegisteredStudents);
+/*------------------------------------------------------------------------------
+  Display Registered Students with their respective Courses
+
+  Precondition: None
+  Post-Condition: List of Registered Students with their respective Courses is
+                  displayed.
+-------------------------------------------------------------------------------*/
 
 void displayCoursesWithRegisteredStudents(LListWithDummyNode& offeredCourses);
+/*------------------------------------------------------------------------------
+  Display Courses with their respective registered Students
+
+  Precondition: None
+  Post-Condition: List of courses with their respective registered Students is
+                  displayed.
+------------------------------------------------------------------------------*/
 
 void displayRegisteredCoursesForStudent(DoublyLinkedList& RegisteredStudents);
+/*------------------------------------------------------------------------------
+  Display registered Courses for a given student
+
+  Precondition: None
+  Post-Condition: List of registered courses for a given Student is displayed.
+-------------------------------------------------------------------------------*/
 
 void displayStudentsInCourse(LListWithDummyNode& offeredCourses);
+/*------------------------------------------------------------------------------
+  Display list of students registered in a given course
+
+  Precondition: None
+  Post-Condition: List of Students registered in a given Course is displayed.
+ -------------------------------------------------------------------------------*/
 
 void displayStudentInfo(DoublyLinkedList& RegisteredStudents);
+/*------------------------------------------------------------------------------
+  Display Registered Students with their respective Courses
+
+  Precondition: None
+  Post-Condition: List of Registered Students with their respective Courses is
+                  displayed.
+ -------------------------------------------------------------------------------*/
 
 void registerStudent(DoublyLinkedList& nonRegisteredStudents,
     DoublyLinkedList& RegisteredStudents,
     LListWithDummyNode& offeredCourses);
+/*------------------------------------------------------------------------------
+  Register a student in given course(s)
+
+  Precondition: None
+  Post-Condition: Student is moved from list of non-registered students to list
+                  of registered students; and is registered in given course(s).
+ -------------------------------------------------------------------------------*/
 
 void addOrDropStudent(DoublyLinkedList& nonRegisteredStudents, DoublyLinkedList& RegisteredStudents,
     LListWithDummyNode& offeredCourses);
+/*------------------------------------------------------------------------------
+  Add or Drop given Student from given course(s)
+
+  Precondition: None
+  Post-Condition: Given course(s) are added/dropped for a given student.
+-------------------------------------------------------------------------------*/
 
 // Main function
 int main() {

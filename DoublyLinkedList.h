@@ -1,6 +1,6 @@
 /*-DoublyLinkedList.h--------------------------------------------------------------------
 
-  Author: Kayan Abdelbaki
+  Author: Kayan Abdelbaki 
 
     This header file defines the DoublyLinkedList data type.
     Basic operations:
