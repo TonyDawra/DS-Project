@@ -1,6 +1,6 @@
 /*  Course.h
 ----------------------------------------------------------------------------------------------------------
-    Author: Amir El Chakif
+    By Amir El Chakif
  
     This header file defines the data fields and member functions of class Course
  
